@@ -380,13 +380,14 @@ def runClassifier(args, options):
       return sum(data) / len(data)
     
     def standardDeviation(data):
-      mean = average(data)
-      variance = 0
+      mean = sum(data) / len(data)
+      squared_diff_sum = 0
       for x in data:
-        variance = variance + (x - mean) ** 2
-      variance = variance / len(data)
-      std_dev = math.sqrt(variance)
-      return std_dev
+          squared_diff = (x - mean) ** 2
+          squared_diff_sum = squared_diff_sum + squared_diff
+      variance = squared_diff_sum / (len(data) - 1)
+      standard_deviation = math.sqrt(variance)
+      return standard_deviation
     
     standardDeviation_time = standardDeviation(outcome_time)
     standardDeviation_validationaccuracy = standardDeviation(outcome_validationaccuracy)
